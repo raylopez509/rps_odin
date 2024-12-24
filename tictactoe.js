@@ -10,6 +10,14 @@ function getComputerChoice() {
   }
 }
 
-for (i = 0; i < 100; i++) {
-  console.log(getComputerChoice());
+function getHumanChoice() {
+  let choice = prompt("Rock, Paper, or Scissors?").toLowerCase();
+  while (choice != "rock" && choice != "paper" && choice != "scissors") {
+    choice = prompt(
+      "Invalid choice. Please choose rock, paper, or scissors."
+    ).toLowerCase();
+  }
+  return choice;
 }
+
+console.log(getHumanChoice());
