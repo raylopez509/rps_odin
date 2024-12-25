@@ -1,2 +1,1 @@
-# tictactoe_odin
-Tic Tac Toe Project from Odin Project
+Rock Paper Scissors Project from Odin Project
