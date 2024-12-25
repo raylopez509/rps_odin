@@ -20,32 +20,45 @@ function getHumanChoice() {
   return choice;
 }
 
-function playGame() {
-  function playRound(humanChoice, computerChoice) {
-    if (
-      (humanChoice == "rock" && computerChoice == "scissors") ||
-      (humanChoice == "paper" && computerChoice == "rock") ||
-      (humanChoice == "scissors" && computerChoice == "paper")
-    ) {
-      console.log("You win! " + humanChoice + " beats " + computerChoice);
-      humanScore++;
-    } else if (
-      (humanChoice == "rock" && computerChoice == "paper") ||
-      (humanChoice == "paper" && computerChoice == "scissors") ||
-      (humanChoice == "scissors" && computerChoice == "rock")
-    ) {
-      console.log("You lose! " + computerChoice + " beats " + humanChoice);
-      computerScore++;
-    }
+let humanScore = 0;
+let computerScore = 0;
+
+const output = document.createElement("div");
+const score = document.createElement("div");
+const body = document.querySelector("body");
+body.appendChild(output);
+body.appendChild(score);
+
+function playRound(humanChoice, computerChoice) {
+  if (
+    (humanChoice == "rock" && computerChoice == "scissors") ||
+    (humanChoice == "paper" && computerChoice == "rock") ||
+    (humanChoice == "scissors" && computerChoice == "paper")
+  ) {
+    output.textContent = "You win! " + humanChoice + " beats " + computerChoice;
+    score.textContent =
+      "Human: " + ++humanScore + " Computer: " + computerScore;
+  } else if (
+    (humanChoice == "rock" && computerChoice == "paper") ||
+    (humanChoice == "paper" && computerChoice == "scissors") ||
+    (humanChoice == "scissors" && computerChoice == "rock")
+  ) {
+    output.textContent =
+      "You lose! " + computerChoice + " beats " + humanChoice;
+    score.textContent =
+      "Human: " + humanScore + " Computer: " + ++computerScore;
+  } else {
+    output.textContent = "Tie!";
+    score.textContent = "Human: " + humanScore + " Computer: " + computerScore;
   }
-  let humanScore = 0;
-  let computerScore = 0;
-  let ROUNDS_PLAYED = 5;
-  for (let i = 0; i < ROUNDS_PLAYED; i++) {
-    playRound(getHumanChoice(), getComputerChoice());
-  }
-  console.log("computer score: " + computerScore);
-  console.log("human score: " + humanScore);
 }
 
-playGame();
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
+
+rock.addEventListener("click", () => playRound("rock", getComputerChoice()));
+paper.addEventListener("click", () => playRound("paper", getComputerChoice()));
+scissors.addEventListener("click", () =>
+  playRound("scissors", getComputerChoice())
+);
